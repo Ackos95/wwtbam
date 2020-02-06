@@ -1,0 +1,14 @@
+body {
+    background-color: #202B33;
+}
+
+.main-wrapper {
+    width: 100%;
+    padding: 0 10%;
+    color: white;
+}
+
+.sub-main-wrapper {
+    background-color: #30404D;
+    padding: 5px 20px;
+}

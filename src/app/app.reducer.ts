@@ -1,7 +1,11 @@
-import { IAppState } from './app.types';
-import { IAppAction } from './common/common.types';
+import { combineReducers, Reducer } from 'redux';
+
+import { IAppActions, IAppState } from './app.types';
+
+import { gameReducer } from './game/game.reducer';
 
 
-const initialState: IAppState = {};
+export const appReducer: Reducer<IAppState, IAppActions> = combineReducers({
+  game: gameReducer,
+});
 
-export const appReducer = (state: IAppState = initialState, action: IAppAction) => state;
