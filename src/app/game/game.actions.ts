@@ -1,5 +1,19 @@
-import { IStartGameAction, IEndGameAction, IStoreHasGameStarted } from './game.types';
-import { END_GAME, START_GAME, STORE_GAME_HAS_STARTED } from './game.constants';
+import {
+  IStartGameAction,
+  IEndGameAction,
+  IStoreHasGameStarted,
+  IStoreCurrentQuestion,
+  IResetCurrentQuestion,
+  IGoToNextQuestion,
+} from './game.types';
+import {
+  END_GAME,
+  GO_TO_NEXT_QUESTION,
+  RESET_CURRENT_QUESTION,
+  START_GAME,
+  STORE_CURRENT_QUESTION,
+  STORE_GAME_HAS_STARTED
+} from './game.constants';
 
 
 export const startGame = (): IStartGameAction => ({
@@ -13,4 +27,17 @@ export const endGame = (): IEndGameAction => ({
 export const storeHasGameStarted = (hasStarted: boolean): IStoreHasGameStarted => ({
   type: STORE_GAME_HAS_STARTED,
   payload: hasStarted,
+});
+
+export const goToNextQuestion = (): IGoToNextQuestion => ({
+  type: GO_TO_NEXT_QUESTION,
+});
+
+export const storeCurrentQuestion = (currentQuestion: number): IStoreCurrentQuestion => ({
+  type: STORE_CURRENT_QUESTION,
+  payload: currentQuestion,
+});
+
+export const resetCurrentQuestion = (): IResetCurrentQuestion => ({
+  type: RESET_CURRENT_QUESTION,
 });

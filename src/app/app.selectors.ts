@@ -10,3 +10,8 @@ export const selectHasGameStarted = wrapSelector<IAppState, IGameState, boolean>
   gameSelectors.selectHasGameStarted,
   (state: IAppState) => state.game,
 );
+
+export const selectCurrentQuestion = wrapSelector<IAppState, IGameState, number>(
+  gameSelectors.selectCurrentQuestion,
+  (state: IAppState) => state.game,
+);
