@@ -1,43 +1,75 @@
 import {
   IStartGameAction,
-  IEndGameAction,
-  IStoreHasGameStarted,
+  IStoreCurrentGame,
   IStoreCurrentQuestion,
-  IResetCurrentQuestion,
-  IGoToNextQuestion,
+  IStoreCurrentQuestionOption,
+  ILoadGamesAction,
+  IGameState,
+  IStoreGamesAction,
+  IStoreQuestionsAction,
+  IStoreQuestionOptionsAction,
+  IAnswerQuestion,
+  IStoreMessage,
 } from './game.types';
 import {
-  END_GAME,
-  GO_TO_NEXT_QUESTION,
-  RESET_CURRENT_QUESTION,
   START_GAME,
+  STORE_CURRENT_GAME,
   STORE_CURRENT_QUESTION,
-  STORE_GAME_HAS_STARTED
+  STORE_CURRENT_QUESTION_OPTION,
+  LOAD_GAMES,
+  STORE_GAMES,
+  STORE_QUESTIONS,
+  STORE_QUESTION_OPTIONS,
+  ANSWER_QUESTION,
+  STORE_MESSAGE,
 } from './game.constants';
 
 
-export const startGame = (): IStartGameAction => ({
+export const loadGames = (): ILoadGamesAction => ({
+  type: LOAD_GAMES,
+});
+
+export const storeGames = (games: IGameState['games']): IStoreGamesAction => ({
+  type: STORE_GAMES,
+  payload: games,
+});
+
+export const storeQuestions = (questions: IGameState['questions']): IStoreQuestionsAction => ({
+  type: STORE_QUESTIONS,
+  payload: questions,
+});
+
+export const storeQuestionOptions = (questionOptions: IGameState['questionOptions']): IStoreQuestionOptionsAction => ({
+  type: STORE_QUESTION_OPTIONS,
+  payload: questionOptions,
+});
+
+export const startGame = (gameId: string): IStartGameAction => ({
   type: START_GAME,
+  payload: gameId,
 });
 
-export const endGame = (): IEndGameAction => ({
-  type: END_GAME,
+export const storeCurrentGame = (gameId: string | null): IStoreCurrentGame => ({
+  type: STORE_CURRENT_GAME,
+  payload: gameId,
 });
 
-export const storeHasGameStarted = (hasStarted: boolean): IStoreHasGameStarted => ({
-  type: STORE_GAME_HAS_STARTED,
-  payload: hasStarted,
+export const answerQuestion = (answer: number): IAnswerQuestion => ({
+  type: ANSWER_QUESTION,
+  payload: answer,
 });
 
-export const goToNextQuestion = (): IGoToNextQuestion => ({
-  type: GO_TO_NEXT_QUESTION,
-});
-
-export const storeCurrentQuestion = (currentQuestion: number): IStoreCurrentQuestion => ({
+export const storeCurrentQuestion = (currentQuestion: string | null): IStoreCurrentQuestion => ({
   type: STORE_CURRENT_QUESTION,
   payload: currentQuestion,
 });
 
-export const resetCurrentQuestion = (): IResetCurrentQuestion => ({
-  type: RESET_CURRENT_QUESTION,
+export const storeCurrentQuestionOption = (currentQuestionOption: string | null): IStoreCurrentQuestionOption => ({
+  type: STORE_CURRENT_QUESTION_OPTION,
+  payload: currentQuestionOption,
+});
+
+export const storeMessage= (message: string | null): IStoreMessage => ({
+  type: STORE_MESSAGE,
+  payload: message,
 });

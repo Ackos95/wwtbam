@@ -1,0 +1,58 @@
+{
+  "games": [
+    {
+      "name": "Test Game",
+      "description": "This is just a test game",
+      "questions": [
+        {
+          "options": [
+            {
+              "text": "Does this question show up under first category?",
+              "answers": [
+                "Yes",
+                "No",
+                "Maybe",
+                "Never"
+              ],
+              "correct": 0
+            },
+            {
+              "text": "How about second question from first category?",
+              "answers": [
+                "Yes",
+                "No",
+                "Hell no!",
+                "Of course"
+              ],
+              "correct": 3
+            },
+            {
+              "text": "Da li ljubavi vidis sta sam uradio?",
+              "answers": [
+                "Da",
+                "Ne",
+                "Mozda",
+                "Mars u picku materinu..."
+              ],
+              "correct": 0
+            }
+          ]
+        },
+        {
+          "options": [
+            {
+              "text": "Ovo pitanje mora uvek doci kao drugo",
+              "answers": [
+                "Acko",
+                "je",
+                "Car",
+                "Najveci"
+              ],
+              "correct": 2
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

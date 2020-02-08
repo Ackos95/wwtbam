@@ -9,8 +9,12 @@ export interface IActionWithPayload<TType, TPayload> {
 
 export interface ISelector<TState, TResult> {
   (state: TState): TResult;
+
+  readonly hasParams: false;
 }
 
 export interface ISelectorWithParams<TState, TParams, TResult> {
   (state: TState, params: TParams): TResult;
+
+  readonly hasParams: true;
 }

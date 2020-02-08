@@ -1,10 +1,12 @@
-import { IGameActions, IGameState } from './game/game.types';
-import { IQuestionsActions, IQuestionsState } from './questions/questions.types';
+import { IGameActions, IGameSelectors, IGameState } from './game/game.types';
 
 
-export type IAppActions = IGameActions | IQuestionsActions;
+export type IAppActions = IGameActions;
+
+export interface IAppSelectors {
+  game: IGameSelectors<IAppState>;
+}
 
 export interface IAppState {
   game: IGameState;
-  questions: IQuestionsState;
 }
