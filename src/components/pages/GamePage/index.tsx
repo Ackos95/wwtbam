@@ -2,11 +2,14 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router';
 
-import { Button } from '@blueprintjs/core';
 import { Question } from './Question';
+import { LogoImage } from '../../common/LogoImage';
+import { QuestionTree } from './QuestionTree';
 
 import { appSelectors } from '../../../app/app.selectors';
 import { startGame } from '../../../app/game/game.actions';
+
+import './assets/styles/index.css';
 
 
 export const GamePage = () => {
@@ -33,16 +36,23 @@ export const GamePage = () => {
   }, [gameId, dispatch]);
 
   return currentGame ? (
-    <div>
-      <h1>{currentGame.name}</h1>
-
-      <Question />
+    <div className="game-page">
+      <div className="question-box">
+        <LogoImage />
+        <Question />
+      </div>
+      <div className="question-tree">
+        <QuestionTree />
+      </div>
     </div>
   ) : (
-    <div>
-      <h2>{message}</h2>
-      <Button onClick={handlePlayAgain}>Play Again!</Button>
-      <Button onClick={handleGoBack}>Back to Menu</Button>
+    <div className="game-finished-page">
+      <LogoImage />
+      <div className="final-message">{message || 'JUst a random test message for testing'}</div>
+      <div className="game-finished-buttons">
+        <div className="default-button" onClick={handleGoBack}>Back to Menu</div>
+        <div className="default-button" onClick={handlePlayAgain}>Play Again!</div>
+      </div>
     </div>
   )
 };

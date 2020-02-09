@@ -1,14 +1,20 @@
 import {
-  IGameSelectors, ISelectCurrentGame,
+  IGameSelectors,
+  ISelectCurrentAnswerIsCorrect,
+  ISelectCurrentGame,
   ISelectCurrentGameId,
-  ISelectCurrentGameNumberOfQuestions, ISelectCurrentQuestion,
+  ISelectCurrentGameNumberOfQuestions,
+  ISelectCurrentQuestion,
   ISelectCurrentQuestionId,
   ISelectCurrentQuestionNumberOfOptions,
-  ISelectCurrentQuestionOption, ISelectCurrentQuestionOptionId,
-  ISelectGameList, ISelectMessage,
+  ISelectCurrentQuestionOption,
+  ISelectCurrentQuestionOptionId,
+  ISelectGameList,
+  ISelectMessage,
+  ISelectQuestionById,
 } from './game.types';
 
-import { createSelector } from '../common/common.selectors';
+import {createSelector, createSelectorWithParams} from '../common/common.selectors';
 
 
 const selectGameList: ISelectGameList = createSelector(
@@ -70,6 +76,18 @@ const selectMessage: ISelectMessage = createSelector(
   (message) => message,
 );
 
+const selectCurrentAnswerIsCorrect: ISelectCurrentAnswerIsCorrect = createSelector(
+  [(state) => state.currentAnswerIsCorrect],
+  (currentAnswerIsCorrect) => currentAnswerIsCorrect,
+);
+
+const selectQuestionById: ISelectQuestionById = createSelectorWithParams(
+  [
+    (state) => state.questions,
+    (state, questionId) => questionId,
+  ],
+  (questions, questionId) => questions[questionId] || null,
+);
 
 export const gameSelectors: IGameSelectors = {
   selectGameList,
@@ -82,4 +100,6 @@ export const gameSelectors: IGameSelectors = {
   selectCurrentQuestionOptionId,
   selectCurrentQuestionOption,
   selectMessage,
+  selectCurrentAnswerIsCorrect,
+  selectQuestionById,
 };

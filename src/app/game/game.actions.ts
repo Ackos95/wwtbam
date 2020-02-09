@@ -10,6 +10,7 @@ import {
   IStoreQuestionOptionsAction,
   IAnswerQuestion,
   IStoreMessage,
+  IStoreCurrentAnswerIsCorrect,
 } from './game.types';
 import {
   START_GAME,
@@ -22,6 +23,7 @@ import {
   STORE_QUESTION_OPTIONS,
   ANSWER_QUESTION,
   STORE_MESSAGE,
+  STORE_CURRENT_ANSWER_IS_CORRECT,
 } from './game.constants';
 
 
@@ -69,7 +71,12 @@ export const storeCurrentQuestionOption = (currentQuestionOption: string | null)
   payload: currentQuestionOption,
 });
 
-export const storeMessage= (message: string | null): IStoreMessage => ({
+export const storeMessage = (message: string | null): IStoreMessage => ({
   type: STORE_MESSAGE,
   payload: message,
+});
+
+export const storeCurrentAnswerIsCorrect = (isCorrect: number | null): IStoreCurrentAnswerIsCorrect => ({
+  type: STORE_CURRENT_ANSWER_IS_CORRECT,
+  payload: isCorrect,
 });

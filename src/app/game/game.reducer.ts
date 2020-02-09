@@ -2,6 +2,7 @@ import { combineReducers, Reducer } from 'redux';
 
 import { IGameActions, IGameState } from './game.types';
 import {
+  STORE_CURRENT_ANSWER_IS_CORRECT,
   STORE_CURRENT_GAME,
   STORE_CURRENT_QUESTION,
   STORE_CURRENT_QUESTION_OPTION,
@@ -19,6 +20,7 @@ const initialState: IGameState = {
   currentQuestion: null,
   currentQuestionOption: null,
   message: null,
+  currentAnswerIsCorrect: null,
 };
 
 const gamesReducer: Reducer<
@@ -98,6 +100,17 @@ const messageReducer: Reducer<
   return state;
 };
 
+const currentAnswerIsCorrectReducer: Reducer<
+  IGameState['currentAnswerIsCorrect'],
+  IGameActions
+> = (state = initialState.currentAnswerIsCorrect, action) => {
+  if (action.type === STORE_CURRENT_ANSWER_IS_CORRECT) {
+    return action.payload;
+  }
+
+  return state;
+};
+
 
 export const gameReducer: Reducer<
   IGameState,
@@ -110,4 +123,5 @@ export const gameReducer: Reducer<
   currentQuestion: currentQuestionReducer,
   currentQuestionOption: currentQuestionOptionReducer,
   message: messageReducer,
+  currentAnswerIsCorrect: currentAnswerIsCorrectReducer
 });

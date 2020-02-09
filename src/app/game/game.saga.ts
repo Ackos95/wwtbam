@@ -1,8 +1,9 @@
-import { take, call, put, select } from 'redux-saga/effects';
+import { take, call, put, select, delay } from 'redux-saga/effects';
 
 import { IGameDataRaw } from './game.types';
 import { ANSWER_QUESTION, LOAD_GAMES, START_GAME } from './game.constants';
 import {
+  storeCurrentAnswerIsCorrect,
   storeCurrentGame,
   storeCurrentQuestion,
   storeCurrentQuestionOption,
@@ -13,6 +14,7 @@ import {
 
 import { appSelectors } from '../app.selectors';
 import {
+  getLastSafeQuestionIndexFrom,
   getQuestionIdByIndex,
   getQuestionIndexById,
   getQuestionOptionIdByIndex,
@@ -21,6 +23,7 @@ import {
 } from './game.utils';
 
 import data from '../../fixtures/games.json';
+import {IAppState} from "../app.types";
 
 
 function* loadGames() {
@@ -79,9 +82,30 @@ function* answerQuestion(answer: number) {
   const currentQuestionOption = yield select(appSelectors.game.selectCurrentQuestionOption);
 
   if (currentQuestionOption.correct === answer) {
+    yield put(storeCurrentAnswerIsCorrect(answer));
+
+    yield delay(3000);
+    yield put(storeCurrentAnswerIsCorrect(null));
+
     yield nextQuestion();
   } else {
-    yield put(storeMessage(`Wrong answer! Correct answer is: ${currentQuestionOption.correct} - "${currentQuestionOption.answers[currentQuestionOption.correct]}"`));
+    const currentQuestionId = yield select(appSelectors.game.selectCurrentQuestionId);
+    const questionIndex = yield call(getQuestionIndexById, currentQuestionId);
+    const lastSafeQuestionIndex = yield call(getLastSafeQuestionIndexFrom, questionIndex);
+
+    let wonSum: string = '0';
+    if (lastSafeQuestionIndex > -1) {
+      const currentGameId = yield select(appSelectors.game.selectCurrentGameId);
+      const safeQuestionId = yield call(getQuestionIdByIndex, currentGameId, lastSafeQuestionIndex);
+      const safeQuestion = yield select((state: IAppState) => appSelectors.game.selectQuestionById(state, safeQuestionId));
+
+      wonSum = safeQuestion.value;
+    }
+
+    yield put(storeMessage(
+      `Wrong answer! Correct answer was: "${currentQuestionOption.answers[currentQuestionOption.correct]}".
+      You won: ${wonSum}`
+    ));
 
     yield endGame();
   }

@@ -2,9 +2,11 @@ import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { Button } from '@blueprintjs/core';
+import { LogoImage } from '../../common/LogoImage';
 
 import { appSelectors } from '../../../app/app.selectors';
+
+import './assets/styles/index.css';
 
 
 export const HomePage = () => {
@@ -17,18 +19,22 @@ export const HomePage = () => {
   );
 
   return (
-    <div>
-      <h1>Welcome</h1>
-      <hr />
-      <h3>Select a game: </h3>
-      {
-        games.map((game) => (
-          <div key={game.id}>
-            <p>{game.name} <span>{game.description ? `(${game.description})` : ''}</span></p>
-            <Button onClick={handleStartGame(game.id)}>Play</Button>
-          </div>
-        ))
-      }
+    <div className="home-page">
+      <LogoImage />
+      <div className="game-selection">Select a game: </div>
+      <div className="all-games">
+        {
+          games.map((game) => (
+            <div key={game.id} className="game-item">
+              <div className="game-name">
+                {game.name}
+                <span className="game-description">{game.description ? ` (${game.description})` : ''}</span>
+              </div>
+              <div className="default-button" onClick={handleStartGame(game.id)}>Play</div>
+            </div>
+          ))
+        }
+      </div>
     </div>
   );
 };

@@ -1,14 +1,9 @@
 body {
-    background-color: #202B33;
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(37,20,100,1) 50%, rgba(3,19,45,1) 100%);
 }
 
 .main-wrapper {
-    width: 100%;
-    padding: 0 10%;
     color: white;
-}
-
-.sub-main-wrapper {
-    background-color: #30404D;
-    padding: 5px 20px;
+    height: 100vh;
 }

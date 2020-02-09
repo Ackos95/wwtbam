@@ -1,4 +1,4 @@
-import { IAction, IActionWithPayload, ISelector } from '../common/common.types';
+import { IAction, IActionWithPayload, ISelector, ISelectorWithParams } from '../common/common.types';
 import {
   START_GAME,
   STORE_CURRENT_GAME,
@@ -10,6 +10,7 @@ import {
   STORE_QUESTIONS,
   STORE_QUESTION_OPTIONS,
   STORE_MESSAGE,
+  STORE_CURRENT_ANSWER_IS_CORRECT,
 } from './game.constants';
 
 
@@ -26,6 +27,7 @@ export type IStoreCurrentQuestion = IActionWithPayload<typeof STORE_CURRENT_QUES
 export type IStoreCurrentQuestionOption = IActionWithPayload<typeof STORE_CURRENT_QUESTION_OPTION, string | null>;
 
 export type IStoreMessage = IActionWithPayload<typeof STORE_MESSAGE, string | null>;
+export type IStoreCurrentAnswerIsCorrect = IActionWithPayload<typeof STORE_CURRENT_ANSWER_IS_CORRECT, number | null>;
 
 export type IGameActions = IStoreGamesAction |
   IStoreQuestionsAction |
@@ -33,7 +35,8 @@ export type IGameActions = IStoreGamesAction |
   IStoreCurrentGame |
   IStoreCurrentQuestion |
   IStoreCurrentQuestionOption |
-  IStoreMessage;
+  IStoreMessage |
+  IStoreCurrentAnswerIsCorrect;
 
 export type ISelectGameList<TInjectedState = IGameState> = ISelector<TInjectedState, IGame[]>;
 export type ISelectCurrentGameId<TInjectedState = IGameState> = ISelector<TInjectedState, string | null>;
@@ -44,7 +47,10 @@ export type ISelectCurrentQuestion<TInjectedState = IGameState> = ISelector<TInj
 export type ISelectCurrentQuestionNumberOfOptions<TInjectedState = IGameState> = ISelector<TInjectedState, number | null>;
 export type ISelectCurrentQuestionOptionId<TInjectedState = IGameState> = ISelector<TInjectedState, string | null>;
 export type ISelectCurrentQuestionOption<TInjectedState = IGameState> = ISelector<TInjectedState, IQuestionOption | null>;
+
 export type ISelectMessage<TInjectedState = IGameState> = ISelector<TInjectedState, string | null>;
+export type ISelectCurrentAnswerIsCorrect<TInjectedState = IGameState> = ISelector<TInjectedState, number | null>;
+export type ISelectQuestionById<TInjectedState = IGameState> = ISelectorWithParams<TInjectedState, string, IQuestion | null>;
 
 export interface IGameSelectors<TInjectedState = IGameState> {
   selectGameList: ISelectGameList<TInjectedState>;
@@ -57,6 +63,8 @@ export interface IGameSelectors<TInjectedState = IGameState> {
   selectCurrentQuestionOptionId: ISelectCurrentQuestionOptionId<TInjectedState>;
   selectCurrentQuestionOption: ISelectCurrentQuestionOption<TInjectedState>;
   selectMessage: ISelectMessage<TInjectedState>;
+  selectCurrentAnswerIsCorrect: ISelectCurrentAnswerIsCorrect<TInjectedState>;
+  selectQuestionById: ISelectQuestionById<TInjectedState>;
 }
 
 export interface IQuestionOptionRaw {
@@ -67,7 +75,7 @@ export interface IQuestionOptionRaw {
 
 export interface IQuestionRaw {
   options: IQuestionOptionRaw[];
-  value?: number;
+  value?: string;
 }
 
 export interface IGameRaw {
@@ -86,7 +94,7 @@ export interface IQuestionOption {
 export interface IQuestion {
   id: string;
   options: string[];
-  value: number;
+  value: string;
 }
 
 export interface IGame {
@@ -108,4 +116,5 @@ export interface IGameState {
   currentQuestion: string | null;
   currentQuestionOption: string | null;
   message: string | null;
+  currentAnswerIsCorrect: number | null;
 }

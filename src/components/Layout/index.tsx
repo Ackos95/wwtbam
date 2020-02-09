@@ -6,8 +6,6 @@ import './assets/styles/index.css';
 
 export const Layout: FunctionComponent = ({ children }) => (
   <div className="main-wrapper">
-    <div className="sub-main-wrapper">
-      {children}
-    </div>
+    {children}
   </div>
 );

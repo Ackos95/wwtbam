@@ -1,0 +1,172 @@
+.game-page {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+}
+
+.question-box {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.question-form {
+    margin-top: -10px;
+    width: 95%;
+}
+
+.question-text {
+    font-size: 32px;
+    padding: 30px;
+    text-align: center;
+    border: 4px solid #3350c8;
+    margin-bottom: 20px;
+    border-radius: 36px;
+    background-color: #031323;
+}
+
+.question-answers {
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.answer-button {
+    flex: 0 47%;
+    font-size: 20px;
+    padding: 10px;
+    border: 4px solid #3350c8;
+    border-radius: 36px;
+    background-color: #031323;
+    margin-bottom: 12px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.answer-button.--correct {
+    animation: blink-animation 1s steps(1) infinite;
+    -webkit-animation: blink-animation 1s steps(1) infinite;
+}
+
+.answer-button:hover:not(.--correct) {
+    background-color: #ebac00;
+    color: black;
+}
+
+.answer-index {
+    color: #ebac00;
+    margin: 0 10px;
+}
+
+.answer-button:hover:not(.--correct) .answer-index {
+    color: black;
+}
+
+.answer-button.--correct .answer-index {
+    color: white;
+}
+
+.question-tree {
+    flex: 1 1;
+    border: 2px solid #3350c8;;
+    border-radius: 30px;
+    margin: 20px 20px 20px 0;
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 95%;
+}
+
+.question-tree-entry {
+    font-size: 32px;
+    padding: 5px 25px;
+    margin: 0 10px;
+    border-radius: 18px;
+    color: #ebac00;
+}
+
+.question-tree-entry.--active {
+    color: white;
+    background: #ebac00;
+}
+
+.question-tree-entry.--sure {
+    color: white;
+}
+
+.question-tree-entry-index {
+    text-align: right;
+    display: inline-block;
+    width: 30px;
+    margin-right: 10px;
+}
+
+.cover-image {
+    width: 45%;
+}
+
+.game-finished-page {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+}
+
+.final-message {
+    font-size: 32px;
+    padding: 30px;
+    text-align: center;
+    border: 4px solid #3350c8;
+    margin-bottom: 20px;
+    border-radius: 36px;
+    background-color: #031323;
+    width: 100%;
+}
+
+.game-finished-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.default-button {
+    font-size: 20px;
+    padding: 10px 60px;
+    border: 4px solid #3350c8;
+    border-radius: 36px;
+    background-color: #031323;
+    cursor: pointer;
+}
+
+.default-button:hover {
+    background-color: #ebac00;
+    color: black;
+}
+
+/* Blinking animations */
+
+@keyframes blink-animation {
+    0%, 100% {
+        background-color: #10f616;
+    }
+    50% {
+        background-color: #031323;
+    }
+}
+
+@-webkit-keyframes blink-animation {
+    0%, 100% {
+        background-color: #10f616;
+    }
+    50% {
+        background-color: #031323;
+    }
+}

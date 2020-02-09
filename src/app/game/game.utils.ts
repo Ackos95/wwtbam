@@ -11,21 +11,21 @@ import {
 
 
 const DEFAULT_QUESTION_VALUES = [
-  100,
-  200,
-  300,
-  500,
-  1000,
-  2000,
-  4000,
-  8000,
-  16000,
-  32000,
-  64000,
-  125000,
-  250000,
-  500000,
-  1000000,
+  '$100',
+  '$200',
+  '$300',
+  '$500',
+  '$1.000',
+  '$2.000',
+  '$4.000',
+  '$8.000',
+  '$16.000',
+  '$32.000',
+  '$64.000',
+  '$125.000',
+  '$250.000',
+  '$500.000',
+  '$1.000.000',
 ];
 
 export const getRandomNumber = (maxNumber: number) =>
@@ -45,6 +45,9 @@ export const getQuestionIndexById = (questionId: string) => {
 
 export const getQuestionOptionIdByIndex = (questionId: string, questionOptionIndex: number) =>
   `${questionId}-${questionOptionIndex}`;
+
+export const getLastSafeQuestionIndexFrom = (questionIndex: number) =>
+  questionIndex > 9 ? questionIndex - 1: questionIndex - (questionIndex % 5) - 1;
 
 export const parseGameDataRaw = (gameDataRaw: IGameDataRaw): {
   games: IGameState['games'];
@@ -68,7 +71,7 @@ export const parseGameDataRaw = (gameDataRaw: IGameDataRaw): {
       const questionId = getQuestionIdByIndex(gameId, questionIndex);
       const question: IQuestion = {
         id: questionId,
-        value: questionRaw.value || DEFAULT_QUESTION_VALUES[questionIndex] || 0,
+        value: questionRaw.value || DEFAULT_QUESTION_VALUES[questionIndex] || `((questionId + 1) * 100)p`,
         options: [],
       };
 
