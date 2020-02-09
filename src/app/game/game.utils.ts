@@ -28,8 +28,21 @@ const DEFAULT_QUESTION_VALUES = [
   '$1.000.000',
 ];
 
-export const getRandomNumber = (maxNumber: number) =>
-  Math.floor(Math.random() * maxNumber);
+const DEFAULT_FRIEND_POSSIBILITIES: [number, number, number, number, number] = [
+  100,
+  95,
+  60,
+  25,
+  0,
+];
+
+const DEFAULT_AUDIENCE_POSSIBILITIES: [number, number, number, number, number] = [
+  100,
+  55,
+  35,
+  25,
+  0
+];
 
 export const getGameIdByIndex = (gameIndex: number) =>
   `gNo-${gameIndex}`;
@@ -47,7 +60,7 @@ export const getQuestionOptionIdByIndex = (questionId: string, questionOptionInd
   `${questionId}-${questionOptionIndex}`;
 
 export const getLastSafeQuestionIndexFrom = (questionIndex: number) =>
-  questionIndex > 9 ? questionIndex - 1: questionIndex - (questionIndex % 5) - 1;
+  questionIndex - (questionIndex % 5) - 1;
 
 export const parseGameDataRaw = (gameDataRaw: IGameDataRaw): {
   games: IGameState['games'];
@@ -65,6 +78,8 @@ export const parseGameDataRaw = (gameDataRaw: IGameDataRaw): {
       name: gameRaw.name,
       description: gameRaw.description,
       questions: [],
+      friendPossibilities: gameRaw.friendPossibilities || DEFAULT_FRIEND_POSSIBILITIES,
+      audiencePossibilities: gameRaw.audiencePossibilities || DEFAULT_AUDIENCE_POSSIBILITIES,
     };
 
     gameRaw.questions.forEach((questionRaw: IQuestionRaw, questionIndex) => {

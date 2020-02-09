@@ -6,14 +6,15 @@ export const AnswerButton: FunctionComponent<{
   index: number;
   isCorrect: boolean;
   isInCorrect: boolean;
+  isIgnored: boolean;
   onClick: () => void;
-}> = ({ answer, index, isCorrect, isInCorrect, onClick }) => {
+}> = ({ answer, index, isCorrect, isInCorrect, isIgnored, onClick }) => {
   const letter = ['A', 'B', 'C', 'D'][index];
 
   return (
     <div
-      className={`answer-button${isCorrect ? ' --correct' : ''}${isInCorrect ? ' --incorrect' : ''}`}
-      onClick={onClick}
+      className={`answer-button${isCorrect ? ' --correct' : ''}${isInCorrect ? ' --incorrect' : ''}${isIgnored ? ' --ignored' : ''}`}
+      onClick={!isIgnored ? onClick : () => {}}
     >
       <span className="answer-index">{letter}:</span> {answer}
     </div>

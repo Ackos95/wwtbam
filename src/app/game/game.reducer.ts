@@ -1,9 +1,7 @@
 import { combineReducers, Reducer } from 'redux';
 
-import { IGameActions, IGameState } from './game.types';
+import { IGameActions, IGameState, IGameStatePure } from './game.types';
 import {
-  STORE_CURRENT_ANSWER_IS_CORRECT,
-  STORE_CURRENT_ANSWER_IS_INCORRECT,
   STORE_CURRENT_GAME,
   STORE_CURRENT_QUESTION,
   STORE_CURRENT_QUESTION_OPTION,
@@ -12,8 +10,11 @@ import {
   STORE_QUESTIONS
 } from './game.constants';
 
+import { answerFlagsReducer } from './answer-flags/answer-flags.reducer';
+import {helpReducer} from "./help/help.reducer";
 
-const initialState: IGameState = {
+
+const initialState: IGameStatePure = {
   games: {},
   questions: {},
   questionOptions: {},
@@ -21,8 +22,6 @@ const initialState: IGameState = {
   currentQuestion: null,
   currentQuestionOption: null,
   message: null,
-  currentAnswerIsCorrect: null,
-  currentAnswerIsInCorrect: null,
 };
 
 const gamesReducer: Reducer<
@@ -102,28 +101,6 @@ const messageReducer: Reducer<
   return state;
 };
 
-const currentAnswerIsCorrectReducer: Reducer<
-  IGameState['currentAnswerIsCorrect'],
-  IGameActions
-> = (state = initialState.currentAnswerIsCorrect, action) => {
-  if (action.type === STORE_CURRENT_ANSWER_IS_CORRECT) {
-    return action.payload;
-  }
-
-  return state;
-};
-
-const currentAnswerIsInCorrectReducer: Reducer<
-  IGameState['currentAnswerIsInCorrect'],
-  IGameActions
-  > = (state = initialState.currentAnswerIsInCorrect, action) => {
-  if (action.type === STORE_CURRENT_ANSWER_IS_INCORRECT) {
-    return action.payload;
-  }
-
-  return state;
-};
-
 
 export const gameReducer: Reducer<
   IGameState,
@@ -136,6 +113,6 @@ export const gameReducer: Reducer<
   currentQuestion: currentQuestionReducer,
   currentQuestionOption: currentQuestionOptionReducer,
   message: messageReducer,
-  currentAnswerIsCorrect: currentAnswerIsCorrectReducer,
-  currentAnswerIsInCorrect: currentAnswerIsInCorrectReducer
+  answerFlags: answerFlagsReducer,
+  help: helpReducer,
 });

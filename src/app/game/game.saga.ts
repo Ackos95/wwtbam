@@ -1,10 +1,9 @@
-import { take, call, put, select, delay } from 'redux-saga/effects';
+import { take, call, put, select, delay, fork } from 'redux-saga/effects';
 
 import { IGameDataRaw } from './game.types';
-import { ANSWER_QUESTION, LOAD_GAMES, START_GAME } from './game.constants';
+import { IAppState } from '../app.types';
+import { ANSWER_QUESTION, GIVE_UP_GAME, LOAD_GAMES, START_GAME } from './game.constants';
 import {
-  storeCurrentAnswerIsCorrect,
-  storeCurrentAnswerIsInCorrect,
   storeCurrentGame,
   storeCurrentQuestion,
   storeCurrentQuestionOption,
@@ -12,6 +11,20 @@ import {
   storeQuestionOptions,
   storeQuestions
 } from './game.actions';
+import {
+  storeCurrentAnswerIsCorrect,
+  storeCurrentAnswerIsIgnored,
+  storeCurrentAnswerIsInCorrect,
+} from './answer-flags/answer-flags.actions';
+import {
+  storeAudienceHelp,
+  storeFriendHelp,
+  storeHelpAudienceUsed,
+  storeHelpFriendUsed,
+  storeHelpHalfUsed,
+} from './help/help.actions';
+
+import { helpSaga } from './help/help.saga';
 
 import { appSelectors } from '../app.selectors';
 import {
@@ -19,12 +32,11 @@ import {
   getQuestionIdByIndex,
   getQuestionIndexById,
   getQuestionOptionIdByIndex,
-  getRandomNumber,
   parseGameDataRaw
 } from './game.utils';
+import { getRandomNumber } from '../common/common.utils';
 
 import data from '../../fixtures/games.json';
-import {IAppState} from "../app.types";
 
 
 function* loadGames() {
@@ -54,10 +66,22 @@ function* startGame(gameId: string) {
   yield put(storeCurrentQuestionOption(questionOptionId));
 }
 
+function* clearHelpInfo() {
+  yield put(storeCurrentAnswerIsIgnored(null));
+  yield put(storeFriendHelp(null));
+  yield put(storeAudienceHelp(null));
+}
+
 function* endGame() {
   yield put(storeCurrentGame(null));
   yield put(storeCurrentQuestion(null));
   yield put(storeCurrentQuestionOption(null));
+
+  yield put(storeHelpAudienceUsed(false));
+  yield put(storeHelpFriendUsed(false));
+  yield put(storeHelpHalfUsed(false));
+
+  yield call(clearHelpInfo);
 }
 
 function* nextQuestion() {
@@ -67,6 +91,8 @@ function* nextQuestion() {
   const numberOfQuestions = yield select(appSelectors.game.selectCurrentGameNumberOfQuestions);
 
   if (currentQuestionIndex <= numberOfQuestions - 2) {
+    yield call(clearHelpInfo);
+
     const questionId = yield call(getQuestionIdByIndex, currentGameId, currentQuestionIndex + 1);
     yield put(storeCurrentQuestion(questionId));
 
@@ -77,6 +103,19 @@ function* nextQuestion() {
 
     yield endGame();
   }
+}
+
+function* calculateWinningByQuestionIndex(safeQuestionIndex: number) {
+  let wonSum: string = '0';
+  if (safeQuestionIndex > -1) {
+    const currentGameId = yield select(appSelectors.game.selectCurrentGameId);
+    const safeQuestionId = yield call(getQuestionIdByIndex, currentGameId, safeQuestionIndex);
+    const safeQuestion = yield select((state: IAppState) => appSelectors.game.selectQuestionById(state, safeQuestionId));
+
+    wonSum = safeQuestion.value;
+  }
+
+  return wonSum;
 }
 
 function* answerQuestion(answer: number) {
@@ -99,15 +138,7 @@ function* answerQuestion(answer: number) {
     const questionIndex = yield call(getQuestionIndexById, currentQuestionId);
     const lastSafeQuestionIndex = yield call(getLastSafeQuestionIndexFrom, questionIndex);
 
-    let wonSum: string = '0';
-    if (lastSafeQuestionIndex > -1) {
-      const currentGameId = yield select(appSelectors.game.selectCurrentGameId);
-      const safeQuestionId = yield call(getQuestionIdByIndex, currentGameId, lastSafeQuestionIndex);
-      const safeQuestion = yield select((state: IAppState) => appSelectors.game.selectQuestionById(state, safeQuestionId));
-
-      wonSum = safeQuestion.value;
-    }
-
+    const wonSum: string = yield call(calculateWinningByQuestionIndex, lastSafeQuestionIndex);
     yield put(storeMessage(
       `Wrong answer! Correct answer was: "${currentQuestionOption.answers[currentQuestionOption.correct]}".
       You won: ${wonSum}`
@@ -117,16 +148,29 @@ function* answerQuestion(answer: number) {
   }
 }
 
+function* giveUpGame() {
+  const currentQuestionId = yield select(appSelectors.game.selectCurrentQuestionId);
+  const currentQuestionIndex = yield call(getQuestionIndexById, currentQuestionId);
+  const safeQuestionIndex = currentQuestionIndex - 1;
+
+  const wonSum: string = yield call(calculateWinningByQuestionIndex, safeQuestionIndex);
+  yield put(storeMessage(`Thank you for playing. You won: ${wonSum}`));
+  yield endGame();
+}
+
 export function* gameSaga() {
   yield take(LOAD_GAMES);
   yield call(loadGames);
 
+  yield fork(helpSaga);
   while (true) {
-    const action = yield take([START_GAME, ANSWER_QUESTION]);
+    const action = yield take([START_GAME, ANSWER_QUESTION, GIVE_UP_GAME]);
     if (action.type === START_GAME) {
       yield call(startGame, action.payload);
     } else if (action.type === ANSWER_QUESTION) {
       yield call(answerQuestion, action.payload);
+    } else if (action.type === GIVE_UP_GAME) {
+      yield call(giveUpGame);
     }
   }
 }

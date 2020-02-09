@@ -10,8 +10,7 @@ import {
   IStoreQuestionOptionsAction,
   IAnswerQuestion,
   IStoreMessage,
-  IStoreCurrentAnswerIsCorrect,
-  IStoreCurrentAnswerIsInCorrect,
+  IGiveUpGame,
 } from './game.types';
 import {
   START_GAME,
@@ -24,8 +23,7 @@ import {
   STORE_QUESTION_OPTIONS,
   ANSWER_QUESTION,
   STORE_MESSAGE,
-  STORE_CURRENT_ANSWER_IS_CORRECT,
-  STORE_CURRENT_ANSWER_IS_INCORRECT,
+  GIVE_UP_GAME,
 } from './game.constants';
 
 
@@ -63,6 +61,10 @@ export const answerQuestion = (answer: number): IAnswerQuestion => ({
   payload: answer,
 });
 
+export const giveUpGame = (): IGiveUpGame => ({
+  type: GIVE_UP_GAME,
+});
+
 export const storeCurrentQuestion = (currentQuestion: string | null): IStoreCurrentQuestion => ({
   type: STORE_CURRENT_QUESTION,
   payload: currentQuestion,
@@ -76,14 +78,4 @@ export const storeCurrentQuestionOption = (currentQuestionOption: string | null)
 export const storeMessage = (message: string | null): IStoreMessage => ({
   type: STORE_MESSAGE,
   payload: message,
-});
-
-export const storeCurrentAnswerIsCorrect = (isCorrect: number | null): IStoreCurrentAnswerIsCorrect => ({
-  type: STORE_CURRENT_ANSWER_IS_CORRECT,
-  payload: isCorrect,
-});
-
-export const storeCurrentAnswerIsInCorrect = (isInCorrect: number | null): IStoreCurrentAnswerIsInCorrect => ({
-  type: STORE_CURRENT_ANSWER_IS_INCORRECT,
-  payload: isInCorrect,
 });

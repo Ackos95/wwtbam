@@ -27,12 +27,12 @@
               "correct": 3
             },
             {
-              "text": "Da li ljubavi vidis sta sam uradio?",
+              "text": "Da li se vidi sta sam uradio?",
               "answers": [
                 "Da",
                 "Ne",
                 "Mozda",
-                "Mars u picku materinu..."
+                "Nista..."
               ],
               "correct": 0
             }

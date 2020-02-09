@@ -70,17 +70,21 @@ const isSelectorWithParams = <TState>(
 const isSelectorWithOutParams = <TState>(
   selector: ISelector<TState, any> | ISelectorWithParams<TState, any, any>
 ): selector is ISelector<TState, any> =>
-  !selector.hasParams;
+  typeof selector === 'function' && !selector.hasParams;
 
 export const wrapSelectors = <
   TWrappingState,
   TWrappedState,
   TSelectorKeys extends string | number | symbol,
   TWrappingSelectors extends {
-    [key in TSelectorKeys]: ISelector<TWrappingState, any> | ISelectorWithParams<TWrappingState, any, any>
+    [key in TSelectorKeys]: ISelector<TWrappingState, any> |
+      ISelectorWithParams<TWrappingState, any, any> |
+      any
   },
   TWrappedSelectors extends {
-    [key in TSelectorKeys]: ISelector<TWrappedState, any> | ISelectorWithParams<TWrappedState, any, any>
+    [key in TSelectorKeys]: ISelector<TWrappedState, any> |
+      ISelectorWithParams<TWrappedState, any, any> |
+      any;
   }
 >(selectors: TWrappedSelectors, wrapper: (state: TWrappingState) => TWrappedState): TWrappingSelectors => {
   const newSelectors: Partial<TWrappingSelectors> = {};
@@ -91,6 +95,8 @@ export const wrapSelectors = <
       newSelectors[key as TSelectorKeys] = wrapSelectorWithParams(selector, wrapper) as any;
     } else if (isSelectorWithOutParams<TWrappedState>(selector)) {
       newSelectors[key as TSelectorKeys] = wrapSelector(selector, wrapper) as any;
+    } else {
+      newSelectors[key as TSelectorKeys] = wrapSelectors(selector, wrapper) as any;
     }
   });
 

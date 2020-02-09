@@ -57,7 +57,12 @@
     -webkit-animation: blink-error 1s steps(1) infinite;
 }
 
-.answer-button:hover:not(.--correct):not(.--incorrect) {
+.answer-button.--ignored {
+    cursor: not-allowed;
+    color: #031323;
+}
+
+.answer-button:hover:not(.--correct):not(.--incorrect):not(.--ignored) {
     background-color: #ebac00;
     color: black;
 }
@@ -67,7 +72,7 @@
     margin: 0 10px;
 }
 
-.answer-button:hover:not(.--correct):not(.--incorrect) .answer-index {
+.answer-button:hover:not(.--correct):not(.--incorrect):not(.--ignored) .answer-index {
     color: black;
 }
 
@@ -79,12 +84,16 @@
     color: white;
 }
 
+.answer-button.--ignored .answer-index {
+    color: #031323;
+}
+
 .question-tree {
     flex: 1 1;
     border: 2px solid #3350c8;;
     border-radius: 30px;
     margin: 20px 20px 20px 0;
-    padding: 30px 0;
+    padding: 15px 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -92,7 +101,7 @@
 }
 
 .question-tree-entry {
-    font-size: 32px;
+    font-size: 30px;
     padding: 5px 25px;
     margin: 0 10px;
     border-radius: 18px;
@@ -144,6 +153,67 @@
     display: flex;
     justify-content: space-around;
     width: 100%;
+}
+
+.give-up-button {
+    width: 60%;
+    margin-top: 20px;
+    margin-left: 20%;
+    text-align: center;
+}
+
+.help-buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+.help-button {
+    width: 100px;
+    height: 100px;
+    padding: 15px !important;
+    border-radius: 50px !important;
+    text-align: center;
+}
+
+.help-button.--used {
+    opacity: 0.7;
+    filter: blur(2px);
+    cursor: not-allowed;
+}
+
+.help-button.--used:hover {
+    background-color: #031323 !important;
+    color: white !important;
+}
+
+.help-button:last-child {
+    margin-right: 0;
+}
+
+.help-dialog {
+    background-color: #031323 !important;
+    color: white;
+    padding: 20px 20px;
+    border: 2px solid #3350c8 !important;
+    border-radius: 30px !important;
+    width: 60% !important;
+}
+
+.help-response {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.help-response-button {
+    width: 50%;
+    margin-left: 25%;
+    text-align: center;
 }
 
 /* Blinking animations */

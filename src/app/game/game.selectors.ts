@@ -1,7 +1,6 @@
+import { createSelector, createSelectorWithParams, wrapSelectors } from '../common/common.selectors';
 import {
-  IGameSelectors,
-  ISelectCurrentAnswerIsCorrect,
-  ISelectCurrentAnswerIsInCorrect,
+  IGameSelectors, IGameState,
   ISelectCurrentGame,
   ISelectCurrentGameId,
   ISelectCurrentGameNumberOfQuestions,
@@ -15,7 +14,11 @@ import {
   ISelectQuestionById,
 } from './game.types';
 
-import {createSelector, createSelectorWithParams} from '../common/common.selectors';
+import { IAnswerFlagsSelectors, IAnswerFlagsState } from './answer-flags/answer-flags.types';
+import { IHelpSelectors, IHelpState } from './help/help.types';
+
+import { answerFlagsSelectors } from './answer-flags/answer-flags.selectors';
+import { helpSelectors } from './help/help.selectors';
 
 
 const selectGameList: ISelectGameList = createSelector(
@@ -77,16 +80,6 @@ const selectMessage: ISelectMessage = createSelector(
   (message) => message,
 );
 
-const selectCurrentAnswerIsCorrect: ISelectCurrentAnswerIsCorrect = createSelector(
-  [(state) => state.currentAnswerIsCorrect],
-  (currentAnswerIsCorrect) => currentAnswerIsCorrect,
-);
-
-const selectCurrentAnswerIsInCorrect: ISelectCurrentAnswerIsInCorrect = createSelector(
-  [(state) => state.currentAnswerIsInCorrect],
-  (currentAnswerIsInCorrect) => currentAnswerIsInCorrect,
-);
-
 const selectQuestionById: ISelectQuestionById = createSelectorWithParams(
   [
     (state) => state.questions,
@@ -106,7 +99,19 @@ export const gameSelectors: IGameSelectors = {
   selectCurrentQuestionOptionId,
   selectCurrentQuestionOption,
   selectMessage,
-  selectCurrentAnswerIsCorrect,
-  selectCurrentAnswerIsInCorrect,
   selectQuestionById,
+  answerFlags: wrapSelectors<
+    IGameState,
+    IAnswerFlagsState,
+    keyof IAnswerFlagsSelectors,
+    IAnswerFlagsSelectors<IGameState>,
+    IAnswerFlagsSelectors
+  >(answerFlagsSelectors, (state) => state.answerFlags),
+  help: wrapSelectors<
+    IGameState,
+    IHelpState,
+    keyof IHelpSelectors,
+    IHelpSelectors<IGameState>,
+    IHelpSelectors
+  >(helpSelectors, (state) => state.help),
 };

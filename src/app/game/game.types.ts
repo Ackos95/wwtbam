@@ -10,9 +10,11 @@ import {
   STORE_QUESTIONS,
   STORE_QUESTION_OPTIONS,
   STORE_MESSAGE,
-  STORE_CURRENT_ANSWER_IS_CORRECT,
-  STORE_CURRENT_ANSWER_IS_INCORRECT,
+  GIVE_UP_GAME,
 } from './game.constants';
+
+import { IAnswerFlagsActions, IAnswerFlagsSelectors, IAnswerFlagsState } from './answer-flags/answer-flags.types';
+import { IHelpActions, IHelpSelectors, IHelpState } from './help/help.types';
 
 
 export type ILoadGamesAction = IAction<typeof LOAD_GAMES>;
@@ -24,12 +26,11 @@ export type IStartGameAction = IActionWithPayload<typeof START_GAME, string>;
 export type IStoreCurrentGame = IActionWithPayload<typeof STORE_CURRENT_GAME, string | null>;
 
 export type IAnswerQuestion = IActionWithPayload<typeof ANSWER_QUESTION, number>;
+export type IGiveUpGame = IAction<typeof GIVE_UP_GAME>;
 export type IStoreCurrentQuestion = IActionWithPayload<typeof STORE_CURRENT_QUESTION, string | null>;
 export type IStoreCurrentQuestionOption = IActionWithPayload<typeof STORE_CURRENT_QUESTION_OPTION, string | null>;
 
 export type IStoreMessage = IActionWithPayload<typeof STORE_MESSAGE, string | null>;
-export type IStoreCurrentAnswerIsCorrect = IActionWithPayload<typeof STORE_CURRENT_ANSWER_IS_CORRECT, number | null>;
-export type IStoreCurrentAnswerIsInCorrect = IActionWithPayload<typeof STORE_CURRENT_ANSWER_IS_INCORRECT, number | null>;
 
 export type IGameActions = IStoreGamesAction |
   IStoreQuestionsAction |
@@ -38,8 +39,8 @@ export type IGameActions = IStoreGamesAction |
   IStoreCurrentQuestion |
   IStoreCurrentQuestionOption |
   IStoreMessage |
-  IStoreCurrentAnswerIsCorrect |
-  IStoreCurrentAnswerIsInCorrect;
+  IAnswerFlagsActions |
+  IHelpActions;
 
 export type ISelectGameList<TInjectedState = IGameState> = ISelector<TInjectedState, IGame[]>;
 export type ISelectCurrentGameId<TInjectedState = IGameState> = ISelector<TInjectedState, string | null>;
@@ -52,8 +53,6 @@ export type ISelectCurrentQuestionOptionId<TInjectedState = IGameState> = ISelec
 export type ISelectCurrentQuestionOption<TInjectedState = IGameState> = ISelector<TInjectedState, IQuestionOption | null>;
 
 export type ISelectMessage<TInjectedState = IGameState> = ISelector<TInjectedState, string | null>;
-export type ISelectCurrentAnswerIsCorrect<TInjectedState = IGameState> = ISelector<TInjectedState, number | null>;
-export type ISelectCurrentAnswerIsInCorrect<TInjectedState = IGameState> = ISelector<TInjectedState, number | null>;
 export type ISelectQuestionById<TInjectedState = IGameState> = ISelectorWithParams<TInjectedState, string, IQuestion | null>;
 
 export interface IGameSelectors<TInjectedState = IGameState> {
@@ -67,9 +66,9 @@ export interface IGameSelectors<TInjectedState = IGameState> {
   selectCurrentQuestionOptionId: ISelectCurrentQuestionOptionId<TInjectedState>;
   selectCurrentQuestionOption: ISelectCurrentQuestionOption<TInjectedState>;
   selectMessage: ISelectMessage<TInjectedState>;
-  selectCurrentAnswerIsCorrect: ISelectCurrentAnswerIsCorrect<TInjectedState>;
-  selectCurrentAnswerIsInCorrect: ISelectCurrentAnswerIsInCorrect<TInjectedState>;
   selectQuestionById: ISelectQuestionById<TInjectedState>;
+  answerFlags: IAnswerFlagsSelectors<TInjectedState>;
+  help: IHelpSelectors<TInjectedState>;
 }
 
 export interface IQuestionOptionRaw {
@@ -87,6 +86,8 @@ export interface IGameRaw {
   name: string;
   description?: string;
   questions: IQuestionRaw[];
+  friendPossibilities?: [number, number, number, number, number];
+  audiencePossibilities?: [number, number, number, number, number];
 }
 
 export interface IQuestionOption {
@@ -107,13 +108,15 @@ export interface IGame {
   name: string;
   description?: string;
   questions: string[];
+  friendPossibilities: [number, number, number, number, number];
+  audiencePossibilities: [number, number, number, number, number];
 }
 
 export interface IGameDataRaw {
   games: IGameRaw[];
 }
 
-export interface IGameState {
+export interface IGameStatePure {
   games: { [gameId: string]: IGame };
   questions: { [questionId: string]: IQuestion };
   questionOptions: { [questionOptionId: string]: IQuestionOption };
@@ -121,6 +124,9 @@ export interface IGameState {
   currentQuestion: string | null;
   currentQuestionOption: string | null;
   message: string | null;
-  currentAnswerIsCorrect: number | null;
-  currentAnswerIsInCorrect: number | null;
+}
+
+export interface IGameState extends IGameStatePure {
+  answerFlags: IAnswerFlagsState;
+  help: IHelpState;
 }
