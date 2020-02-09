@@ -1,80 +1,38 @@
 {
   "games": [
     {
-      "name": "Test Game",
-      "description": "This is just a test game",
+      "name": "Sample Quiz",
+      "description": "This is just a sample quiz with customly added 45 question sorted by difficulty",
       "questions": [
         {
           "options": [
             {
-              "text": "Does this question show up under first category?",
+              "text": "What color is made from Blue and Yellow?",
               "answers": [
-                "Yes",
+                "Green",
+                "Yellow",
+                "Red",
+                "Purple"
+              ],
+              "correct": 0
+            },
+            {
+              "text": "Do penguins have knees?",
+              "answers": [
                 "No",
                 "Maybe",
-                "Never"
-              ],
-              "correct": 0
-            },
-            {
-              "text": "How about second question from first category?",
-              "answers": [
-                "Yes",
-                "No",
-                "Hell no!",
-                "Of course"
+                "I don't know",
+                "Yes"
               ],
               "correct": 3
             },
             {
-              "text": "Da li se vidi sta sam uradio?",
+              "text": "Which of these countries doesn't have white in their flag?",
               "answers": [
-                "Da",
-                "Ne",
-                "Mozda",
-                "Nista..."
-              ],
-              "correct": 0
-            }
-          ]
-        },
-        {
-          "options": [
-            {
-              "text": "Ovo pitanje mora uvek doci kao drugo",
-              "answers": [
-                "Acko",
-                "je",
-                "Car",
-                "Najveci"
-              ],
-              "correct": 2
-            }
-          ]
-        },
-        {
-          "options": [
-            {
-              "text": "13 + 22",
-              "answers": [
-                "22",
-                "13",
-                "35",
-                "332"
-              ],
-              "correct": 2
-            }
-          ]
-        },
-        {
-          "options": [
-            {
-              "text": "118 - 213",
-              "answers": [
-                "312",
-                "11",
-                "-2913",
-                "-95"
+                "Russia",
+                "Serbia",
+                "United Kingdom",
+                "Germany"
               ],
               "correct": 3
             }
@@ -83,12 +41,32 @@
         {
           "options": [
             {
-              "text": "Random",
+              "text": "When did Serbia become fully independent(in the 19th century)",
               "answers": [
-                "Tacno",
-                "ne",
-                "ne",
-                "ne"
+                "1389.",
+                "1835.",
+                "1878.",
+                "1867"
+              ],
+              "correct": 2
+            },
+            {
+              "text": "When was the first nuclear bomb detonated on live targets",
+              "answers": [
+                "1945.",
+                "1938.",
+                "1943.",
+                "1949."
+              ],
+              "correct": 0
+            },
+            {
+              "text": "When was Paris raided by Ragnar Lothbrok?",
+              "answers": [
+                "793.",
+                "845.",
+                "1066.",
+                "639."
               ],
               "correct": 0
             }
@@ -97,54 +75,32 @@
         {
           "options": [
             {
-              "text": "Dokle vise?",
+              "text": "Who plays Vito Corleone in Godfather 2?",
               "answers": [
-                "Ne znam",
-                "Sta ces",
-                "Jebi ga",
-                "Dosta je valjda"
+                "Marlon Brando",
+                "Robert De Niro",
+                "Al Pacino",
+                "Brad Pitt"
               ],
               "correct": 1
-            }
-          ]
-        },
-        {
-          "options": [
+            },
             {
-              "text": "Ovo pitanje mora uvek doci kao drugo",
+              "text": "Which character does Milos Bikovic play in \"Montevieo: Bog te video\"?",
               "answers": [
-                "Acko",
-                "je",
-                "Car",
-                "Najveci"
+                "Mosa",
+                "Balerina",
+                "Tirke",
+                "Milutinac"
               ],
               "correct": 2
-            }
-          ]
-        },
-        {
-          "options": [
+            },
             {
-              "text": "13 + 22",
+              "text": "Which movie depicts one of the most important events in Serbian history?",
               "answers": [
-                "22",
-                "13",
-                "35",
-                "332"
-              ],
-              "correct": 2
-            }
-          ]
-        },
-        {
-          "options": [
-            {
-              "text": "118 - 213",
-              "answers": [
-                "312",
-                "11",
-                "-2913",
-                "-95"
+                "Ko to tamo peva",
+                "Kad porastem bicu kengur",
+                "Valter brani Sarajevo",
+                "Boj na Kosovu"
               ],
               "correct": 3
             }
@@ -153,40 +109,32 @@
         {
           "options": [
             {
-              "text": "Random",
+              "text": "What is the capital of Lithuania?",
               "answers": [
-                "Tacno",
-                "ne",
-                "ne",
-                "ne"
-              ],
-              "correct": 0
-            }
-          ]
-        },
-        {
-          "options": [
-            {
-              "text": "Dokle vise?",
-              "answers": [
-                "Ne znam",
-                "Sta ces",
-                "Jebi ga",
-                "Dosta je valjda"
+                "Talinn",
+                "Vilnus",
+                "Moscow",
+                "Kaliningrad"
               ],
               "correct": 1
-            }
-          ]
-        },
-        {
-          "options": [
+            },
             {
-              "text": "Ovo pitanje mora uvek doci kao drugo",
+              "text": "Which of these countries remained neutral in both world wars?",
               "answers": [
-                "Acko",
-                "je",
-                "Car",
-                "Najveci"
+                "Belgium",
+                "Norway",
+                "Netherlands",
+                "Switzerland"
+              ],
+              "correct": 3
+            },
+            {
+              "text": "Whose quote is this: Veni, vidi, vici?",
+              "answers": [
+                "Constantine",
+                "Romule",
+                "Julius Caesar",
+                "Octavian August"
               ],
               "correct": 2
             }
@@ -195,26 +143,66 @@
         {
           "options": [
             {
-              "text": "13 + 22",
+              "text": "Who is the president of Belarus?",
               "answers": [
-                "22",
-                "13",
-                "35",
-                "332"
+                "Lukasenko",
+                "Putin",
+                "Vucic",
+                "Makron"
+              ],
+              "correct": 0
+            },
+            {
+              "text": "Who was the first king of Norway?",
+              "answers": [
+                "Bjorn Ironside",
+                "Ragnar Lothbrok",
+                "Harald Finehair",
+                "Richard Lionhert"
               ],
               "correct": 2
+            },
+            {
+              "text": "Which of these countries border spain?",
+              "answers": [
+                "Germany",
+                "Switzerland",
+                "Italy",
+                "United Kingdom"
+              ],
+              "correct": 3
             }
           ]
         },
         {
           "options": [
             {
-              "text": "Dokle vise?",
+              "text": "Who played Forest Gump?",
               "answers": [
-                "Ne znam",
-                "Sta ces",
-                "Jebi ga",
-                "Dosta je valjda"
+                "Tom Hanks",
+                "Al Pacino",
+                "Leonardo Di Caprio",
+                "Leonardo Da Vinci"
+              ],
+              "correct": 0
+            },
+            {
+              "text": "Which of these allied countries won the first battle in world war 1?",
+              "answers": [
+                "France",
+                "Serbia",
+                "United Kingdom",
+                "Russia"
+              ],
+              "correct": 1
+            },
+            {
+              "text": "What is the cubic root of 27?",
+              "answers": [
+                "1.41",
+                "3",
+                "9",
+                "1.71"
               ],
               "correct": 1
             }
@@ -223,14 +211,306 @@
         {
           "options": [
             {
-              "text": "Ovo je poslednje!!!",
+              "text": "Which of these countries is a member of NATO?",
               "answers": [
-                "Idemoooooo",
-                "to",
-                "to",
-                "to"
+                "Serbia",
+                "Belarus",
+                "BiH",
+                "Montenegro"
+              ],
+              "correct": 3
+            },
+            {
+              "text": "When did the battle of Waterloo occur?",
+              "answers": [
+                "1389.",
+                "1848.",
+                "1814.",
+                "1809."
+              ],
+              "correct": 2
+            },
+            {
+              "text": "Who was the last king of Serbia?",
+              "answers": [
+                "Petar Karadjorjevic",
+                "Dusan Nemanjic",
+                "Milos Obrenovic",
+                "Aleksandar Karadjordjevic"
               ],
               "correct": 0
+            }
+          ]
+        },
+        {
+          "options": [
+            {
+              "text": "According to the Greek mythology, what was the job of Atlas?",
+              "answers": [
+                "To kill the minotaur",
+                "To decide people's destinies",
+                "To hold the sky",
+                "To destroy the world"
+              ],
+              "correct": 2
+            },
+            {
+              "text": "Which of the Roman gods is the equivalent of Ares(greek god of war)?",
+              "answers": [
+                "Neptune",
+                "Mars",
+                "Jupiter",
+                "Saturn"
+              ],
+              "correct": 1
+            },
+            {
+              "text": "From which tribe(country maybe) did the Romans adapt their mythology?",
+              "answers": [
+                "Greeks",
+                "Etruscans",
+                "Celts",
+                "Gauls"
+              ],
+              "correct": 1
+            }
+          ]
+        },
+        {
+          "options": [
+            {
+              "text": "Which of words is spelled correctly?",
+              "answers": [
+                "Allready",
+                "Inpossible",
+                "Irrelevant",
+                "Consstant"
+              ],
+              "correct": 2
+            },
+            {
+              "text": "Which of these counries does not have red in their flag?",
+              "answers": [
+                "Germany",
+                "Netherlands",
+                "Italy",
+                "Ireland"
+              ],
+              "correct": 3
+            },
+            {
+              "text": "Which of these countries is majorly Christian?",
+              "answers": [
+                "Ethiopia",
+                "Egypt",
+                "Tunis",
+                "Lybia"
+              ],
+              "correct": 0
+            }
+          ]
+        },
+        {
+          "options": [
+            {
+              "text": "Which of these actors is a follower of Eastern Orthodox Church?",
+              "answers": [
+                "Tom Cruise",
+                "Tom Hanks",
+                "Leonardo DiCaprio",
+                "Robert De Niro"
+              ],
+              "correct": 1
+            },
+            {
+              "text": "What is the nickname of the character from Kad porastem bicu kengru who is always on the roof?",
+              "answers": [
+                "Sumpor",
+                "Braca",
+                "Burgija",
+                "Hibrid"
+              ],
+              "correct": 3
+            },
+            {
+              "text": "How many kilometres(approximately) can a Viking longship pass in 24 hours?",
+              "answers": [
+                "200",
+                "30",
+                "80",
+                "100"
+              ],
+              "correct": 0
+            }
+          ]
+        },
+        {
+          "options": [
+            {
+              "text": "What is the full title of Star Wars Episode V?",
+              "answers": [
+                "A new hope",
+                "Revenge of the Sith",
+                "Return of the Jedi",
+                "The Empire strikes back"
+              ],
+              "correct": 3
+            },
+            {
+              "text": "What is the full title of Star Wars Episode VI?",
+              "answers": [
+                "A new hope",
+                "Revenge of the Sith",
+                "Return of the Jedi",
+                "The Empire strikes back"
+              ],
+              "correct": 2
+            },
+            {
+              "text": "What is the full title of Star Wars Episode IV?",
+              "answers": [
+                "A new hope",
+                "Revenge of the Sith",
+                "Return of the Jedi",
+                "The Empire strikes back"
+              ],
+              "correct": 0
+            }
+          ]
+        },
+        {
+          "options": [
+            {
+              "text": "When did the Viking age end?",
+              "answers": [
+                "1066.",
+                "793.",
+                "865.",
+                "1215."
+              ],
+              "correct": 0
+            },
+            {
+              "text": "When did the Viking age begin?",
+              "answers": [
+                "1066.",
+                "793.",
+                "865.",
+                "1215."
+              ],
+              "correct": 1
+            },
+            {
+              "text": "When did Ragnar Lothbrok die?",
+              "answers": [
+                "1066.",
+                "793.",
+                "865.",
+                "1215."
+              ],
+              "correct": 2
+            }
+          ]
+        },
+        {
+          "options": [
+            {
+              "text": "When was the Dunkirk evacuation?",
+              "answers": [
+                "1939.",
+                "1941.",
+                "1940.",
+                "1942."
+              ],
+              "correct": 2
+            },
+            {
+              "text": "When was Germany unified?",
+              "answers": [
+                "1871.",
+                "1880",
+                "1881",
+                "1870"
+              ],
+              "correct": 0
+            },
+            {
+              "text": "When was Italy unified?",
+              "answers": [
+                "1871.",
+                "1880",
+                "1881",
+                "1870"
+              ],
+              "correct": 3
+            }
+          ]
+        },
+        {
+          "options": [
+            {
+              "text": "When did the 7 years' war end?",
+              "answers": [
+                "1913.",
+                "1848.",
+                "1654.",
+                "1763."
+              ],
+              "correct": 3
+            },
+            {
+              "text": "When did the hundred years' war end?",
+              "answers": [
+                "1315.",
+                "1453.",
+                "1578.",
+                "1289."
+              ],
+              "correct": 1
+            },
+            {
+              "text": "When did the great turkish war end?",
+              "answers": [
+                "1638.",
+                "1849.",
+                "1699.",
+                "1787."
+              ],
+              "correct": 2
+            }
+          ]
+        },
+        {
+          "options": [
+            {
+              "text": "Which of these countries has the highest average elevation?",
+              "answers": [
+                "France",
+                "Germany",
+                "Italy",
+                "Spain"
+              ],
+              "correct": 3
+            },
+            {
+              "text": "Which of these countries has the highest population density?",
+              "answers": [
+                "Vatican",
+                "Monaco",
+                "Singapore",
+                "Bahrain"
+              ],
+              "correct": 1
+            },
+            {
+              "text": "Which of these countries covers the highest amount of time zones?",
+              "answers": [
+                "Russia",
+                "United Kingdom",
+                "United States",
+                "France"
+              ],
+              "correct": 3
             }
           ]
         }

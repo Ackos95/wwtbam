@@ -1,7 +1,8 @@
 {
   "name": "wwtbam",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "private": true,
+  "homepage": "https://ackos95.github.io/wwtbam",
   "dependencies": {
     "@blueprintjs/core": "^3.23.1",
     "react": "^16.12.0",
@@ -18,7 +19,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -41,6 +44,7 @@
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.7",
-    "@types/react-router-dom": "^5.1.3"
+    "@types/react-router-dom": "^5.1.3",
+    "gh-pages": "^2.2.0"
   }
 }
