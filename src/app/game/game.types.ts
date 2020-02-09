@@ -11,6 +11,7 @@ import {
   STORE_QUESTION_OPTIONS,
   STORE_MESSAGE,
   STORE_CURRENT_ANSWER_IS_CORRECT,
+  STORE_CURRENT_ANSWER_IS_INCORRECT,
 } from './game.constants';
 
 
@@ -28,6 +29,7 @@ export type IStoreCurrentQuestionOption = IActionWithPayload<typeof STORE_CURREN
 
 export type IStoreMessage = IActionWithPayload<typeof STORE_MESSAGE, string | null>;
 export type IStoreCurrentAnswerIsCorrect = IActionWithPayload<typeof STORE_CURRENT_ANSWER_IS_CORRECT, number | null>;
+export type IStoreCurrentAnswerIsInCorrect = IActionWithPayload<typeof STORE_CURRENT_ANSWER_IS_INCORRECT, number | null>;
 
 export type IGameActions = IStoreGamesAction |
   IStoreQuestionsAction |
@@ -36,7 +38,8 @@ export type IGameActions = IStoreGamesAction |
   IStoreCurrentQuestion |
   IStoreCurrentQuestionOption |
   IStoreMessage |
-  IStoreCurrentAnswerIsCorrect;
+  IStoreCurrentAnswerIsCorrect |
+  IStoreCurrentAnswerIsInCorrect;
 
 export type ISelectGameList<TInjectedState = IGameState> = ISelector<TInjectedState, IGame[]>;
 export type ISelectCurrentGameId<TInjectedState = IGameState> = ISelector<TInjectedState, string | null>;
@@ -50,6 +53,7 @@ export type ISelectCurrentQuestionOption<TInjectedState = IGameState> = ISelecto
 
 export type ISelectMessage<TInjectedState = IGameState> = ISelector<TInjectedState, string | null>;
 export type ISelectCurrentAnswerIsCorrect<TInjectedState = IGameState> = ISelector<TInjectedState, number | null>;
+export type ISelectCurrentAnswerIsInCorrect<TInjectedState = IGameState> = ISelector<TInjectedState, number | null>;
 export type ISelectQuestionById<TInjectedState = IGameState> = ISelectorWithParams<TInjectedState, string, IQuestion | null>;
 
 export interface IGameSelectors<TInjectedState = IGameState> {
@@ -64,6 +68,7 @@ export interface IGameSelectors<TInjectedState = IGameState> {
   selectCurrentQuestionOption: ISelectCurrentQuestionOption<TInjectedState>;
   selectMessage: ISelectMessage<TInjectedState>;
   selectCurrentAnswerIsCorrect: ISelectCurrentAnswerIsCorrect<TInjectedState>;
+  selectCurrentAnswerIsInCorrect: ISelectCurrentAnswerIsInCorrect<TInjectedState>;
   selectQuestionById: ISelectQuestionById<TInjectedState>;
 }
 
@@ -117,4 +122,5 @@ export interface IGameState {
   currentQuestionOption: string | null;
   message: string | null;
   currentAnswerIsCorrect: number | null;
+  currentAnswerIsInCorrect: number | null;
 }

@@ -11,6 +11,7 @@ import {
   IAnswerQuestion,
   IStoreMessage,
   IStoreCurrentAnswerIsCorrect,
+  IStoreCurrentAnswerIsInCorrect,
 } from './game.types';
 import {
   START_GAME,
@@ -24,6 +25,7 @@ import {
   ANSWER_QUESTION,
   STORE_MESSAGE,
   STORE_CURRENT_ANSWER_IS_CORRECT,
+  STORE_CURRENT_ANSWER_IS_INCORRECT,
 } from './game.constants';
 
 
@@ -79,4 +81,9 @@ export const storeMessage = (message: string | null): IStoreMessage => ({
 export const storeCurrentAnswerIsCorrect = (isCorrect: number | null): IStoreCurrentAnswerIsCorrect => ({
   type: STORE_CURRENT_ANSWER_IS_CORRECT,
   payload: isCorrect,
+});
+
+export const storeCurrentAnswerIsInCorrect = (isInCorrect: number | null): IStoreCurrentAnswerIsInCorrect => ({
+  type: STORE_CURRENT_ANSWER_IS_INCORRECT,
+  payload: isInCorrect,
 });

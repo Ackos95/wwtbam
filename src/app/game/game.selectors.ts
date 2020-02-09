@@ -1,6 +1,7 @@
 import {
   IGameSelectors,
   ISelectCurrentAnswerIsCorrect,
+  ISelectCurrentAnswerIsInCorrect,
   ISelectCurrentGame,
   ISelectCurrentGameId,
   ISelectCurrentGameNumberOfQuestions,
@@ -81,6 +82,11 @@ const selectCurrentAnswerIsCorrect: ISelectCurrentAnswerIsCorrect = createSelect
   (currentAnswerIsCorrect) => currentAnswerIsCorrect,
 );
 
+const selectCurrentAnswerIsInCorrect: ISelectCurrentAnswerIsInCorrect = createSelector(
+  [(state) => state.currentAnswerIsInCorrect],
+  (currentAnswerIsInCorrect) => currentAnswerIsInCorrect,
+);
+
 const selectQuestionById: ISelectQuestionById = createSelectorWithParams(
   [
     (state) => state.questions,
@@ -101,5 +107,6 @@ export const gameSelectors: IGameSelectors = {
   selectCurrentQuestionOption,
   selectMessage,
   selectCurrentAnswerIsCorrect,
+  selectCurrentAnswerIsInCorrect,
   selectQuestionById,
 };

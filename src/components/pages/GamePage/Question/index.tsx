@@ -10,7 +10,9 @@ import { appSelectors } from '../../../../app/app.selectors';
 export const Question = () => {
   const dispatch = useDispatch();
   const currentQuestionOption = useSelector(appSelectors.game.selectCurrentQuestionOption);
+
   const currentAnswerIsCorrect = useSelector(appSelectors.game.selectCurrentAnswerIsCorrect);
+  const currentAnswerIsInCorrect = useSelector(appSelectors.game.selectCurrentAnswerIsInCorrect);
 
   const handleAnswer = useCallback(
     (answer: number) => () => dispatch(answerQuestion(answer)),
@@ -30,6 +32,7 @@ export const Question = () => {
               onClick={handleAnswer(index)}
               index={index}
               isCorrect={index === currentAnswerIsCorrect}
+              isInCorrect={index === currentAnswerIsInCorrect}
               answer={answer}
             />
           ))

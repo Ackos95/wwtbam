@@ -4,6 +4,7 @@ import { IGameDataRaw } from './game.types';
 import { ANSWER_QUESTION, LOAD_GAMES, START_GAME } from './game.constants';
 import {
   storeCurrentAnswerIsCorrect,
+  storeCurrentAnswerIsInCorrect,
   storeCurrentGame,
   storeCurrentQuestion,
   storeCurrentQuestionOption,
@@ -89,6 +90,11 @@ function* answerQuestion(answer: number) {
 
     yield nextQuestion();
   } else {
+    yield put(storeCurrentAnswerIsInCorrect(answer));
+
+    yield delay(3000);
+    yield put(storeCurrentAnswerIsInCorrect(null));
+
     const currentQuestionId = yield select(appSelectors.game.selectCurrentQuestionId);
     const questionIndex = yield call(getQuestionIndexById, currentQuestionId);
     const lastSafeQuestionIndex = yield call(getLastSafeQuestionIndexFrom, questionIndex);
